@@ -109,12 +109,12 @@ Bugout.prototype.WebTorrent = WebTorrent;
 Bugout.prototype._onTorrent = function() {
   debug("torrent", this.identifier, this.torrent);
   this.emit("torrent", this.identifier, this.torrent);
-  if (this.torrent.discovery.tracker) {
+  if (this?.torrent?.discovery?.tracker) {
     this.torrent.discovery.tracker.on("update", partial(function(bugout, update) {
       bugout.emit("tracker", bugout.identifier, update);
     }, this));
   }
-  this.torrent.discovery.on("trackerAnnounce", partial(function(bugout) {
+  this?.torrent?.discovery?.on("trackerAnnounce", partial(function(bugout) {
     bugout.emit("announce", bugout.identifier);
     bugout.connections();
   }, this));
